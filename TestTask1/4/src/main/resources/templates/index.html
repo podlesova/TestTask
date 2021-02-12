@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table border="1">
+        <caption><b>Таблица пользователей</b></caption>
+        <tr>
+            <th>Номер</th>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Электронный адрес</th>
+        </tr>
+        <tr th:each="user : ${users}">
+
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.email}"></td>
+        </tr>
+    </table>
+</div>
+<br><br><br><br>
+<div>
+    <h1 th:text="${error}"></h1>
+    <form method="post" action="/add" >
+        <table>
+            <tr>
+                <td>Номер:</td>
+                <td> <input type="text" name="id" placeholder="Заполнить при редактировании"></td>
+            </tr>
+            <tr>
+                <td>Имя:</td>
+                <td><input type="text" name="name" placeholder="Обязательно для заполнения"></td>
+            </tr>
+            <tr>
+                <td>Телефон:</td>
+                <td><input type="text" name="phone" placeholder="Обязательно для заполнения"></td>
+            </tr>
+            <tr>
+                <td>Электронный адрес:</td>
+                <td><input type="text" name="email"></td>
+            </tr>
+        </table>
+        <button type="submit">Добавить/Изменить</button>
+    </form>
+</div>
+
+<br><br><br><br>
+<div>
+    <form method="post" action="/delete" >
+        <table>
+            <tr>
+                <td>Номер:</td>
+                <td> <input type="text" name="id" ></td>
+            </tr>
+        </table>
+        <button type="submit">Удалить</button>
+    </form>
+</div>
+<br><br><br><br>
+<div>
+    <h1 th:text="${errorFile}"></h1>
+    <form method="post" action="/" enctype="multipart/form-data" >
+        <input type="file" name="file">
+        <button type="submit">Загрузить</button>
+    </form>
+</div>
+</body>
+</html>
