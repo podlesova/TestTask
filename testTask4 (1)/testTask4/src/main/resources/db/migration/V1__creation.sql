@@ -1,0 +1,15 @@
+drop table if exists bank CASCADE;
+drop table if exists clients CASCADE;
+drop table if exists credit_offers CASCADE;
+drop table if exists credits CASCADE;
+drop table if exists plans CASCADE;
+create table bank (id varchar(32) not null, id_client varchar(32) , id_credit varchar(32) , primary key (id));
+create table clients (id varchar(32) not null, email varchar(255), name varchar(255) not null, passport varchar(255) not null, phone varchar(255) not null, primary key (id));
+create table credit_offers (id varchar(32) not null, credit_sum integer, id_client varchar(32) , id_credit varchar(32) , primary key (id));
+create table credits (id varchar(32) not null, limit integer not null, percent float not null, primary key (id));
+create table plans (id varchar(32) not null, credit_body_sum numeric(19,2) not null, date timestamp not null, percent_body_sum numeric(19,2) not null, total_sum numeric(19,2) not null, id_credit_offer varchar(32) not null, primary key (id));
+alter table bank add constraint FKlnkk7vb8ufa8fad3bqln4mg6g foreign key (id_client) references clients ON DELETE CASCADE ON UPDATE CASCADE;
+alter table bank add constraint FKd96suqd6ix476wa1eu4gpkl6g foreign key (id_credit) references credits ON DELETE CASCADE ON UPDATE CASCADE;
+alter table credit_offers add constraint FKdi7br6ftt4hhrjb4r7jneoovi foreign key (id_client) references clients ON DELETE CASCADE ON UPDATE CASCADE;
+alter table credit_offers add constraint FK1irbjo8ccmb6rax5sqsr4c8tt foreign key (id_credit) references credits ON DELETE CASCADE ON UPDATE CASCADE;
+alter table plans add constraint FK5kgforp7l1s019h0vw3qkfv5g foreign key (id_credit_offer) references credit_offers ON DELETE CASCADE ON UPDATE CASCADE;;
